@@ -1,0 +1,66 @@
+canvas {
+	background: black;
+	display: block;
+	margin: 20px auto;
+}
+
+body {
+    padding-top: 70px;
+    background: #060625;
+}
+
+.jumbotron {
+    color: #2c3e50;
+    background: #ecf0f1;
+}
+
+.navbar-inverse {
+    background: #2C3E50;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-inverse .navbar-nav {
+    color: white;
+}
+
+#ctrl {
+    width: 30%;
+    margin: 2.5%;
+    float: left;
+    background-color: gray;  
+}
+
+#circles {
+     width: 60%;
+     margin: 2.5%;
+     background-color: gray;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 700;
+}
+
+.input-group-addon {
+  text-align: left;
+}
+
+.second {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>1600 Circles</title>
+	<script type="text/javascript" src="paper-full.js"></script>
+
+	<link 
+		rel="stylesheet" 
+		type="text/css" 
+		href="circlesjs.css">
+
+	<script 
+		type="text/paperscript" 
+		canvas="myCanvas"
+	>
+	
+	// define a random order for drawing the circles
+	var fillCircles = function(nCircles, circles)
+	{
+		for(var ix = 0;(ix<nCircles); ix++)	{ circles[ix]=ix; };
+		for
+		(	
+			var temp = 0,
+				range = nCircles, 
+				target=0;
+
+			target<(nCircles-1);
+
+			target++, 
+			range--
+		)
+		{
+			var origin = target + Math.floor(Math.random() * range);
+			temp = circles[target];
+			circles[target] = circles[origin];
+			circles[origin] = temp;
+		}	//	end for 
+	};	// end function()
+
+	// define a random color for a circle
+	var getRandomColor = function()
+	{
+		var r = Math.floor(Math.random() * 256);
+		var g = Math.floor(Math.random() * 256);
+		var b = Math.floor(Math.random() * 256);
+		return "rgb(" + r + ", " + g + ", " + b + ")";
+	};	// end function()
+
+	var panelHeight = 800;
+	var minRadius = 3;
+	var rows = 40;
+	var nCircles = rows * rows;
+	var circles = [];
+
+	circles.length = nCircles;
+	fillCircles(nCircles,circles);
+
+	var unit = Math.floor(panelHeight/(rows+2));
+	var radius = Math.floor(unit/3);
+
+	
+	var body = document.getElementsByTagName("body");
+	console.log("body [" + body[0].clientWidth + "," + body[0].clientHeight + "]");
+
+
+	if(radius < minRadius)
+	{
+		// check for really small circles
+		console.log("circles would be too small to draw. Aborting");
+	}
+	else
+	{
+		// then draw them all
+		for(var ix=0; ix<nCircles;ix++)
+		{
+			var x = unit + Math.floor(circles[ix] % rows) * unit;
+			var y = unit + Math.floor(circles[ix] / rows) * unit;
+			//console.log("circle " + ix + ": (" + x + "," + y + "), radius " + radius);
+			new Path.Circle(new Point(x, y), radius).fillColor = getRandomColor();
+		}	// end for
+	}	// end if
+
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" width="800" height="800"></canvas>
+</body>
+</html>
