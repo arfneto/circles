@@ -13,6 +13,13 @@
 	  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	>
 
+	  <link
+	    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" 
+	    rel="stylesheet" 
+	    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" 
+	    crossorigin="anonymous"
+	  >
+
 	<script type="text/javascript" src="/code/lib/paper-full.js"></script>
 	
 	<link 
@@ -23,46 +30,82 @@
 	<title>Circles</title>
 </head>
 <body>
-	<div id="ctrl" class="col-md-4 control">
-		       <h1>Draw a few circles</h1>
-               <input  class="form-control" 
-                        type="number" 
-                        name="nRows"
-                        min="2" max="40"
-                        placeholder="Number of rows"
-                        value="8"
-                >
-				<input
-		        	id="animate"
-		        	type="checkbox"
-		        	name="animate"
-		        	value="animate"
-		        >
-		        <label for="animate"> Animate Drawing?</label>
-		        <div class="second">
-					<input
-				    	id="changeNumber"
-				        type="checkbox"
-				        name="change"
-				        value="change"
-				    >
-				    <label for="changeNumber"> Also change number of rows in animation</label>
-	                <input  
+	<div id="ctrl" class="col-md-4 ">
+		<form class="form-horizontal">
+
+			<h1><i class="fa fa-paint-brush" aria-hidden="true"></i> Draw a few circles</h1>
+
+			<div class="form-group">
+				<label for="nRows" class="col-sm-2 control-label">
+					Rows:
+				</label>
+	           <input   
 	                    type="number" 
-	                    name="nSeconds"
-	                    min="2" max="100"
-	                    value = "10"
-	                    placeholder="x/10 s interval"
-	                >
-		        </div>
-                <button id="go"
-                	class="btn btn-lg btn-success btn-block">Draw them all!</button>
-                <button id="stop"
-                	class="btn btn-lg btn-warning btn-block hide">Click to STOP
-                </button>
-				<div class="panel-footer panel-info">
-					<p id="status" class="panel panel-info"> footer </p>
-				</div>
+	                    name="nRows"
+	                    min="2" max="40"
+	                    placeholder="Number of rows"
+	                    value="8"
+	            >
+			</div>
+
+			<div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      	<div class="checkbox">
+						<input
+				        	id="animate"
+				        	type="checkbox"
+				        	name="animate"
+				        	value="animate"
+				        >
+		        		<label for="animate"> Animate Drawing</label>
+			      </div>
+			    </div>
+			</div>
+			
+			<div class="form-group">
+				<label for="nSeconds" class="col-sm-2 control-label">x/10s:</label>
+                <input  
+                    type="number" 
+                    name="nSeconds"
+                    min="2" max="100"
+                    value = "10"
+                    placeholder="x/10 s interval"
+                >
+		 	</div>
+		 	
+			<div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      	<div class="checkbox">
+						<input
+				        	id="changeNumber"
+				        	type="checkbox"
+				        	name="change"
+				        	value="change"
+				        >
+		        		<label 
+		        			for="changeNumber"
+		        		>
+		        			Change # of rows at each cycle
+		        		</label>
+		        	</div>
+			    </div>
+			</div>
+		</form>
+        <button 
+        	id="go"
+        	class="btn btn-lg btn-success btn-block"
+        >
+        	<i class="fa fa-play" aria-hidden="true"></i> <strong> Draw them all!</strong>
+        </button>
+        <button 
+        	id="stop"
+            class="btn btn-lg btn-warning btn-block hide"
+        >
+        	<i class="fa fa-stop" aria-hidden="true"></i> Click to STOP
+   		</button>
+		<div class="panel-footer panel-info">
+			<p id="status" class="panel panel-info"> footer </p>
+		</div>
 	</div>
 	<div id="circles" class="col-md-8 panel">
 		<canvas id="myCanvas" width="800" height="800"></canvas>
@@ -219,6 +262,7 @@ btnGo.addEventListener(
  	{
  		pRows = Number(nRows.value);
  		if((pRows<2) || (pRows>40)){pRows = defRows};
+		pStatus.textContent = "Running...";
 		drawCircles(pRows);
 		if(pAnimate)
 		{
@@ -241,10 +285,14 @@ btnGo.addEventListener(
 					}
 					else
 					{
-						drawCirlces(pRows);
+						drawCircles(pRows);
 					}
 				}, 
 				100*pSeconds);
+		}
+		else
+		{
+			pStatus.textContent = "Circles are drawn in N rows by N columns";
 		};	// end if
  	}	// end function()
 );	// end event...
@@ -254,7 +302,9 @@ btnStop.addEventListener(
  	function()
  	{
  		// first of all, stop drawing
+		pStatus.textContent = "Stopping...";
  		clearInterval(stop);
+		pStatus.textContent = "Circles are drawn in N rows by N columns";
  		btnGo.classList.remove("disabled");
  		
  		btnStop.classList.add("disabled");

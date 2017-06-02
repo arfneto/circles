@@ -6,7 +6,8 @@ canvas {
 
 body {
     padding-top: 70px;
-    background: #060625;
+    /*background: #060625;*/
+    background: black;
 }
 
 .jumbotron {
@@ -30,13 +31,22 @@ body {
     width: 30%;
     margin: 2.5%;
     float: left;
-    background-color: gray;  
+    border-radius: 5%;
+    background-color: #a3bbe2;  
 }
 
 #circles {
-     width: 60%;
-     margin: 2.5%;
-     background-color: gray;
+    width: 60%;
+    margin: 2.5%;
+    /*background-color: #a3bbe2;*/
+    background-color: black;
+    border-radius: 5%;
+}
+
+#go, #stop {
+    width:60%;
+    margin: 6px auto;
+    
 }
 
 h1 {
@@ -63,4 +73,9 @@ h2 {
 
 .hide {
     display: none;
+}
+
+.panel-info {
+    padding-top: 6px;
+    background-color: #a3bbe2;
 }
