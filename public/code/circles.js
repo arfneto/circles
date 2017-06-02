@@ -1,6 +1,4 @@
-var paper = require("paper");
 
-var canvas  = null;
 var nRows 	= null;
 var nSeconds = null;
 var animate = null;
@@ -8,7 +6,6 @@ var pStatus = null;
 var btnGo = null;
 var btnStop = null;
 
-var myPaper = null;
 
 //
 // control parms
@@ -22,8 +19,9 @@ var pSeconds = defSeconds;
 var pChangeNumber = false;
 var change = null;
 var stop = null;
-
-canvas  = document.getElementById("myCanvas");
+var canvas  = document.getElementById("myCanvas");
+var myPaper = new paper.PaperScope();
+myPaper.setup(canvas);
 pStatus = document.getElementById("status");
 nRows 	= document.querySelector('input[name="nRows"]');
 animate = document.getElementById("animate");
@@ -31,9 +29,6 @@ change = document.getElementById("changeNumber");
 nSeconds = document.querySelector('input[name="nSeconds"]');
 btnGo  	= document.getElementById("go");
 btnStop	= document.getElementById("stop");
-
-myPaper = new paper.PaperScope();
-myPaper.setup(canvas);
 
 nRows.focus();
 pStatus.textContent = "Circles are drawn in N rows by N columns";
@@ -170,6 +165,7 @@ btnStop.addEventListener(
  	function()
  	{
  		// first of all, stop drawing
+ 		console.log("click button 1");
 		pStatus.textContent = "Stopping...";
  		clearInterval(stop);
 		pStatus.textContent = "Circles are drawn in N rows by N columns";
