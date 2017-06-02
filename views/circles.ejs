@@ -118,7 +118,7 @@ var nRows 	= null;
 var nSeconds = null;
 var animate = null;
 var pStatus = null;
-var btnGgo = null;
+var btnGo = null;
 var btnStop = null;
 
 var myPaper = null;
@@ -164,12 +164,12 @@ pStatus.textContent = "Circles are drawn in N rows by N columns";
 			var g = Math.floor(Math.random() * 256);
 			var b = Math.floor(Math.random() * 256);
 			return "rgb(" + r + ", " + g + ", " + b + ")";
-		};	// end function()
+		}	// end function()
 	
 		// define a random order for drawing the circles
 		function fillCircles(nCircles, circles)
 		{
-			for(var ix = 0;(ix<nCircles); ix++)	{ circles[ix]=ix; };
+			for(var ix = 0;(ix<nCircles); ix++)	{ circles[ix]=ix; }
 			for
 			(	
 				var temp = 0,
@@ -187,7 +187,7 @@ pStatus.textContent = "Circles are drawn in N rows by N columns";
 				circles[target] = circles[origin];
 				circles[origin] = temp;
 			}	//	end for 
-		};	// end function()
+		}	// end function()
 	
 		//console.log("drawCircles");
 		circles.length = nCircles;
@@ -217,57 +217,38 @@ pStatus.textContent = "Circles are drawn in N rows by N columns";
 		}	// end if
 	} // end function()
 
-function isNumber(obj)
-{
-  	return obj!== undefined && 
-  		typeof(obj) === 'number' && 
-  		!isNaN(obj);
-}
-
 animate.onchange = 
  	function()
  	{
  		if(animate.checked)
  		{
- 			var items = document.querySelectorAll(".second");
- 			for (var i=0;i<items.length;i++)
- 			{
- 				items[i].classList.add("visible");
- 				//items[i].style.visibility = "visible";
- 			};
  			pAnimate = true;
  		}
  		else
  		{
- 			var items = document.querySelectorAll(".second");
- 			for (var i=0;i<items.length;i++)
- 			{
- 				items[i].classList.remove("visible");
- 				//items[i].style.visibility = "hidden";
- 				pAnimate = false;
- 				pChangeNumber = false;
- 			};
- 		};
+ 			pAnimate = false;
+ 			pChangeNumber = false;
+ 		}
  	};	// end function()
  
 change.onchange = 
  	function()
  	{
  		pChangeNumber = change.checked;
- 	}	// end function();
+ 	};	// end function();
 
 btnGo.addEventListener(
 	"click",	
  	function()
  	{
  		pRows = Number(nRows.value);
- 		if((pRows<2) || (pRows>40)){pRows = defRows};
+ 		if((pRows<2) || (pRows>40)){pRows = defRows}
 		pStatus.textContent = "Running...";
 		drawCircles(pRows);
 		if(pAnimate)
 		{
 	 		pSeconds = Number(nSeconds.value);
-	 		if((pSeconds<10) || (pSeconds>50)){pSeconds = defSeconds};
+	 		if((pSeconds<10) || (pSeconds>50)){pSeconds = defSeconds}
 	 		btnGo.classList.add("disabled");
 	 		
 	 		btnStop.classList.add("visible");
@@ -293,7 +274,7 @@ btnGo.addEventListener(
 		else
 		{
 			pStatus.textContent = "Circles are drawn in N rows by N columns";
-		};	// end if
+		}	// end if
  	}	// end function()
 );	// end event...
 
@@ -314,7 +295,7 @@ btnStop.addEventListener(
  		for (var i=0;i<items.length;i++)
  		{
  			items[i].classList.remove("visible");
- 		};
+ 		}
  		pAnimate = false;
  		animate.checked = false;
  		pChangeNumber = false;
